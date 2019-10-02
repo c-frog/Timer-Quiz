@@ -9,7 +9,9 @@ let answer3 = document.getElementById("answer3");
 let answer4 = document.getElementById("answer4");
 let totalScore = document.getElementById("totalScore");
 let score = 0;
-
+let seconds = 75000
+let countdown = document.getElementById("timer")
+let interval;
 // Questions for quiz
 let questions = [
     {
@@ -72,6 +74,7 @@ function  startQuiz() {
     start.style.display = "none";
     renderQuestion();
     quiz.style.display = "block"
+    interval = setInterval(timer, 1000)
     }
 
 // Check answer functions
@@ -79,8 +82,7 @@ function checkAnswer(answer) {
     if (answer == questions [runningQuestion].correct) {
         score++
     } else {
-        alert("Wrong!"); // still NEED TO ADD AN ALERT
-
+        seconds -= 10000;
     }
     count = 0
     if (runningQuestion < lastQuestion) {
@@ -96,11 +98,21 @@ function correctAnswer() {
 
 // SCORE PAGE
 function scoreRender() {
+    clearInterval(interval);
     quiz.style.display = "none"
     initialsScore.style.display = "block";
-    totalScore.innerHTML = "You scored " + score + "%";
+    totalScore.innerHTML = "Your final score is " + seconds / 1000;
 }
 
+
+// Time function
+
+setInterval(timer(seconds), 1000)
+function timer(seconds) {   
+    seconds -= 1;
+    let secondsString = seconds.toString();
+    countdown.innerText = secondsString;
+}
 
 
 

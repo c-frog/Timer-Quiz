@@ -8,16 +8,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- Navigation link and Timer -->
+    <div id="header">
+        <a>View Highscores</a>
+        <h5>Time left: <div id="timer">99</div></h5>
+    </div>
 <!-- Opening screen -->
-    <div id = "startDiv">
+    <div class = "main-content" id = "startDiv">
         <h1>Coding Quiz!</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore vel, obcaecati nostrum, fugiat tenetur saepe minus sunt eaque libero voluptas</p>
         <button>Start Quiz</button>
     </div>
 <!-- Question and Answers div -->
-    <div id="quizDiv" style = "display: none;">
+    <div class = "main-content" id="quizDiv" style = "display: none;">
         <div id = "question"> 
-            <h3>Question</h1>
+            <h3>Question</h3>
         </div>
         
         <div id = "answers">
@@ -28,10 +33,25 @@
         </div>
     </div>
 <!-- End screen -->
-    <div id="scoreDiv" style = "display: none;">
-        <h3 id="totalScore"></h1>
+    <div class = "main-content" id="scoreDiv" style = "display: none;">
+        <h3>All done!</h3>
+        <p id="totalScore"></p>
+        
+        <form action="">
+            Enter your initals to save your score
+            <input type="text">
+            <input type="submit">
+        </form>
+        
     </div>
 
+<!-- Highscores screen -->
+    <div id="highscores" style = "display: none;">
+        <ol id="scoresList">
+        </ol>
+        <button id="goBack">Go Back</button>
+        <button id="clearScores">Clear Highscores</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

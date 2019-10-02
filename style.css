@@ -1,0 +1,27 @@
+/* Main dimensions */
+.main-content {
+    margin: 25%;
+}
+
+
+/* Questions and answers */
+
+button {
+    background: purple;
+    color: white;
+}
+#answers {
+    display: inline-grid;
+}
+button {
+    margin: 2px;
+    border-radius: 5px;
+}
+    button:focus {
+        outline: none;
+    }
+
+
+/* Score and Input */
+
+

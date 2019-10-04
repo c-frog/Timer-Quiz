@@ -1,4 +1,4 @@
-//Select all elements
+// GIVE VARIABLES TO EACH MAIN ELEMENT
 let start = document.getElementById("startDiv");
 let quiz = document.getElementById("quizDiv");
 let initialsScore = document.getElementById("scoreDiv");
@@ -8,11 +8,11 @@ let answer2 = document.getElementById("answer2");
 let answer3 = document.getElementById("answer3");
 let answer4 = document.getElementById("answer4");
 let totalScore = document.getElementById("totalScore");
-let score = 0;
-let seconds = 75000
-let countdown = document.getElementById("timer")
+let seconds = 60 ;
+
 let interval;
-// Questions for quiz
+
+// ARRAY OF QUESTIONS AND ANSWERS
 let questions = [
     {
         question: "Commonly used data types DO NOT INCLUDE:",
@@ -55,10 +55,12 @@ let questions = [
         correct: "4"
     },
 ]
+
+// VARIABLES FOR QUESTION'S ARRAY
 let lastQuestion = questions.length-1;
 let runningQuestion = 0;
 
-// Function to render questions and answers
+// RENDER QUESTIONS AND ANSWERS
 function renderQuestion() {
     let q = questions[runningQuestion];
     question.innerHTML = "<h3>" + q.question + "</h3>";
@@ -67,29 +69,43 @@ function renderQuestion() {
     answer3.innerHTML = q.answer3;
     answer4.innerHTML = q.answer4;
 }
-
-start.addEventListener("click", startQuiz)
-
+let startBtn = document.getElementById("startBtn")
+startBtn.addEventListener("click", startQuiz)
+// TIMER FUNCTION
+function countDown() {
+    let timeLeft = document.getElementById("timer")
+    let x = setInterval(function() {
+        seconds--;
+        let secondsString = seconds.toString();
+        timeLeft.innerText = secondsString;
+        if (seconds <= 0) {
+            clearInterval(x);
+            alert("out of time")
+        } else if (lastQuestion === runningQuestion){
+            clearInterval(x)
+        }
+    }, 1000);
+}
+// STARTING THE QUIZ
 function  startQuiz() {
     start.style.display = "none";
     renderQuestion();
     quiz.style.display = "block"
-    interval = setInterval(timer, 1000)
+    countDown();
     }
-
 // Check answer functions
 function checkAnswer(answer) {
     if (answer == questions [runningQuestion].correct) {
-        score++
+        console.log("correct!");
     } else {
-        seconds -= 10000;
+        seconds -= 10;
+        console.log("incorrect");
     }
     count = 0
     if (runningQuestion < lastQuestion) {
         runningQuestion++;
         renderQuestion();
     } else 
-    //clearInterval(timer); //
     scoreRender();
 }
 function correctAnswer() {
@@ -98,22 +114,22 @@ function correctAnswer() {
 
 // SCORE PAGE
 function scoreRender() {
-    clearInterval(interval);
     quiz.style.display = "none"
     initialsScore.style.display = "block";
-    totalScore.innerHTML = "Your final score is " + seconds / 1000;
+    totalScore.innerHTML = "Your final score is " + seconds;
+}
+
+// SAVING AND DISPLAYING HIGHSCORES
+let username = document.getElementById("username");
+let submitBtn = document.getElementById("submitBtn")
+submitBtn.addEventListener("click", saveScore)
+
+
+function saveScore() {
+    event.preventDefault();
+    localStorage.setItem("userScore", JSON.stringify([username.value, seconds]))
+    console.log(JSON.parse(localStorage.getItem("userScore")))
 }
 
 
-// Time function
-
-setInterval(timer(seconds), 1000)
-function timer(seconds) {   
-    seconds -= 1;
-    let secondsString = seconds.toString();
-    countdown.innerText = secondsString;
-}
-
-
-
-
+// HIGH SCORES PAGE

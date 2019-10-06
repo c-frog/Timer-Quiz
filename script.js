@@ -1,19 +1,17 @@
 // GIVE VARIABLES TO EACH MAIN ELEMENT
-let start = document.getElementById("startDiv");
-let quiz = document.getElementById("quizDiv");
-let initialsScore = document.getElementById("scoreDiv");
-let question = document.getElementById("question")
-let answer1 = document.getElementById("answer1");
-let answer2 = document.getElementById("answer2");
-let answer3 = document.getElementById("answer3");
-let answer4 = document.getElementById("answer4");
-let totalScore = document.getElementById("totalScore");
-let seconds = 60 ;
-
-let interval;
+var start = document.getElementById("startDiv");
+var quiz = document.getElementById("quizDiv");
+var scoreDiv = document.getElementById("scoreDiv");
+var question = document.getElementById("question")
+var answer1 = document.getElementById("answer1");
+var answer2 = document.getElementById("answer2");
+var answer3 = document.getElementById("answer3");
+var answer4 = document.getElementById("answer4");
+var totalScore = document.getElementById("totalScore");
+var seconds = 60 ;
 
 // ARRAY OF QUESTIONS AND ANSWERS
-let questions = [
+var questions = [
     {
         question: "Commonly used data types DO NOT INCLUDE:",
         answer1: "Strings",
@@ -57,26 +55,26 @@ let questions = [
 ]
 
 // VARIABLES FOR QUESTION'S ARRAY
-let lastQuestion = questions.length-1;
-let runningQuestion = 0;
+var lastQuestion = questions.length-1;
+var runningQuestion = 0;
 
 // RENDER QUESTIONS AND ANSWERS
 function renderQuestion() {
-    let q = questions[runningQuestion];
+    var q = questions[runningQuestion];
     question.innerHTML = "<h3>" + q.question + "</h3>";
     answer1.innerHTML = q.answer1;
     answer2.innerHTML = q.answer2;
     answer3.innerHTML = q.answer3;
     answer4.innerHTML = q.answer4;
 }
-let startBtn = document.getElementById("startBtn")
+var startBtn = document.getElementById("startBtn")
 startBtn.addEventListener("click", startQuiz)
 // TIMER FUNCTION
 function countDown() {
-    let timeLeft = document.getElementById("timer")
-    let x = setInterval(function() {
+    var timeLeft = document.getElementById("timer")
+    var x = setInterval(function() {
         seconds--;
-        let secondsString = seconds.toString();
+        var secondsString = seconds.toString();
         timeLeft.innerText = secondsString;
         if (seconds <= 0) {
             clearInterval(x);
@@ -115,21 +113,28 @@ function correctAnswer() {
 // SCORE PAGE
 function scoreRender() {
     quiz.style.display = "none"
-    initialsScore.style.display = "block";
+    scoreDiv.style.display = "block";
     totalScore.innerHTML = "Your final score is " + seconds;
 }
 
-// SAVING AND DISPLAYING HIGHSCORES
-let username = document.getElementById("username");
-let submitBtn = document.getElementById("submitBtn")
-submitBtn.addEventListener("click", saveScore)
+// SAVING HIGHSCORES
+var userInitals = document.getElementById("user-initials");
+var submitScore = document.getElementById("submitScore");
 
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-function saveScore() {
+submitScore.addEventListener("click", function(submitScore){
     event.preventDefault();
-    localStorage.setItem("userScore", JSON.stringify([username.value, seconds]))
-    console.log(JSON.parse(localStorage.getItem("userScore")))
-}
 
-
-// HIGH SCORES PAGE
+    var user = {
+        initials: userInitals.value.trim(),
+        score: seconds,
+    }
+    console.log(user)
+    highScores.push(user)
+    
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    console.log(highScores)
+    window.location.assign("highscores.html")
+    
+})

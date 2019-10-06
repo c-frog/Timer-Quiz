@@ -16,7 +16,7 @@
 <!-- Opening screen -->
     <div class = "main-content" id = "startDiv">
         <h1>Coding Quiz!</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore vel, obcaecati nostrum, fugiat tenetur saepe minus sunt eaque libero voluptas</p>
+        <p>When you start this quiz, you will be prompted with multiple choice questions. If you get a question wrong, it will deduct 10 seconds on the remaining time to finish the quiz! </p>
         <button id="startBtn">Start Quiz</button>
     </div>
 <!-- Question and Answers div -->
@@ -36,17 +36,17 @@
     <div class = "main-content" id="scoreDiv" style = "display: none;">
         <h3>All done!</h3>
         <p id="totalScore"></p>
-        
         <form action="highscores.html">
-            Enter your initals to save your score
-            <input type="text" 
-            name="initials"
-            id="username">
+        <p>
+            Enter your initals to save your score</p>
+            <input type="text" name = "user-initials" id="user-initials">
+        
+            </input>
             <button
             type="submit" 
-            id="submitBtn"
-            ">Submit</button>
-        </form>
+            id="submitScore">
+                    Submit</button>
+                </form>
         
     </div>
 
